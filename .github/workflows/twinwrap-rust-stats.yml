@@ -26,8 +26,13 @@ on:
 permissions:
   contents: read
 
+# bash on every runner, Windows included, so $VARS and globs mean one thing.
+defaults:
+  run:
+    shell: bash
+
 env:
-  TWINWRAP: "twinwrap @ git+https://github.com/godofecht/twinwrap@37a67f4d1c9bec824cce5b88e23a4b47d10c2707"
+  TWINWRAP: "twinwrap @ git+https://github.com/godofecht/twinwrap@c090297934ec4420495d4c0f0de620d779e5a053"
   FLOW_REF: "v2.0.0"
 
 jobs:
