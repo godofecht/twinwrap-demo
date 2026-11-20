@@ -32,7 +32,7 @@ defaults:
     shell: bash
 
 env:
-  TWINWRAP: "twinwrap @ git+https://github.com/godofecht/twinwrap@a12dbce49dc9fa60dc03723ec29010ce9285c246"
+  TWINWRAP: "twinwrap @ git+https://github.com/godofecht/twinwrap@v0.1.1"
   FLOW_REF: "v2.0.0"
 
 jobs:
