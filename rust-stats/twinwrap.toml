@@ -1,0 +1,88 @@
+[package]
+name = "rust-stats"
+version = "0.1.0"
+description = "Example: a Rust library wrapped for PyPI and npm by twinwrap."
+license = "MIT"
+repository = "https://github.com/godofecht/twinwrap-demo"
+
+[source]
+lang = "rust"
+path = "."
+
+[[function]]
+sig = "fn add(a: i32, b: i32) -> i32"
+
+[[function]]
+sig = "fn mean(xs: [f64]) -> f64"
+doc = "Arithmetic mean, summed pairwise."
+
+[[function]]
+sig = "fn scale(xs: [f64], k: f64) -> [f64; len(xs)]"
+
+[[function]]
+sig = "fn cumsum(xs: [i64]) -> [i64; len(xs)]"
+
+[[function]]
+sig = "fn to_f32(xs: [f64]) -> [f32; len(xs)]"
+
+[[function]]
+sig = "fn is_sorted(xs: [f64]) -> bool"
+
+[[function]]
+sig = "fn shout(s: str) -> str"
+
+[[function]]
+sig = "fn word_count(s: str) -> u32"
+
+[[function]]
+sig = "fn checked_div(a: i64, b: i64) -> i64"
+
+[[test]]
+call = "add"
+args = [2, 40]
+expect = 42
+
+[[test]]
+call = "add"
+args = [2147483647, 1]
+expect = -2147483648
+
+[[test]]
+call = "mean"
+args = [[0.1, 0.2, 0.3]]
+
+[[test]]
+call = "mean"
+args = [[]]
+
+[[test]]
+call = "scale"
+args = [[1.0, -2.5, 0.0], -0.0]
+
+[[test]]
+call = "cumsum"
+args = [[9007199254740993, 1, -5]]
+expect = [9007199254740993, 9007199254740994, 9007199254740989]
+
+[[test]]
+call = "to_f32"
+args = [[0.1, 1e40]]
+
+[[test]]
+call = "is_sorted"
+args = [[1.0, 2.0, 2.0]]
+expect = true
+
+[[test]]
+call = "shout"
+args = ["grüße, world"]
+expect = "GRÜSSE, WORLD!"
+
+[[test]]
+call = "word_count"
+args = ["  one two\tthree  "]
+expect = 3
+
+[[test]]
+call = "checked_div"
+args = [7, 0]

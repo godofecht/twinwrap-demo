@@ -1,0 +1,76 @@
+# A small numeric library used to exercise twinwrap.
+#
+# twinwrap calls these through their C names. A slice parameter arrives as
+# a pointer followed by an i32 length; a returned array is written into a
+# trailing pointer and length the caller allocates.
+
+function add(a: i32, b: i32) -> i32 {
+    return a + b
+}
+
+function mean(xs: ptr<f64>, xs_len: i32) -> f64 {
+    let mut s: f64 = 0.0
+    let mut i: i32 = 0
+    while i < xs_len {
+        s = s + xs[i]
+        i = i + 1
+    }
+    return s / (xs_len as f64)
+}
+
+function scale(xs: ptr<f64>, xs_len: i32, k: f64, out: ptr<f64>, out_len: i32) -> i32 {
+    let mut i: i32 = 0
+    while i < out_len {
+        out[i] = xs[i] * k
+        i = i + 1
+    }
+    return 0
+}
+
+function clamp(xs: ptr<f64>, xs_len: i32, lo: f64, hi: f64, out: ptr<f64>, out_len: i32) -> i32 {
+    let mut i: i32 = 0
+    while i < out_len {
+        let v: f64 = xs[i]
+        if v < lo {
+            out[i] = lo
+        } elif v > hi {
+            out[i] = hi
+        } else {
+            out[i] = v
+        }
+        i = i + 1
+    }
+    return 0
+}
+
+function count_vowels(s: ptr<u8>, s_len: i32) -> i32 {
+    let mut n: i32 = 0
+    let mut i: i32 = 0
+    while i < s_len {
+        let c: u8 = s[i]
+        if c == 97 || c == 101 || c == 105 || c == 111 || c == 117 {
+            n = n + 1
+        }
+        i = i + 1
+    }
+    return n
+}
+
+function fib(n: i32) -> i64 {
+    let mut a: i64 = 0
+    let mut b: i64 = 1
+    let mut i: i32 = 0
+    while i < n {
+        let t: i64 = a + b
+        a = b
+        b = t
+        i = i + 1
+    }
+    return a
+}
+
+# a * x + y. With FMA contraction a native build would round once and
+# disagree with wasm; twinwrap compiles with -ffp-contract=off.
+function axpy(a: f64, x: f64, y: f64) -> f64 {
+    return a * x + y
+}
